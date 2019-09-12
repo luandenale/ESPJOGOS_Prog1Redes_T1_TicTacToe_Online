@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 662a9eda6d914fb418a565d2d295d1cd
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Assurant
+  fontNames:
+  - Assurant
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 33a67da64743e6944aec224085a6e5af, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
