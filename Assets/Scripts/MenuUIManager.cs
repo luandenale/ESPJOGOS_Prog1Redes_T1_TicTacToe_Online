@@ -12,38 +12,46 @@ public class MenuUIManager : MonoBehaviour
         _menuAnimator = GetComponent<Animator>();
     }
 
-    public void LocalSelected()
+    public void PlayLocal()
     {
+        _menuAnimator.SetTrigger("Play Local");
+    }
 
+    public void LocalBackToMenu()
+    {
+        _menuAnimator.SetTrigger("Back To Menu");
     }
 
     public void OnlineSelected()
     {
+        _menuAnimator.SetTrigger("Play Online");
+    }
 
+    public void OnlineBackToMenu()
+    {
+        _menuAnimator.SetTrigger("Back To Play Online");
     }
 
     public void V1Start()
     {
-        // _menuAnimator.SetTrigger("1v1 Selected");
-        // GameManager.instance.currentState = GameStates.STARTING;
+        _menuAnimator.SetTrigger("1v1 Start");
+        GameManager.instance.currentState = GameStates.STARTING;
     }
 
     public void VCpuSelected()
     {
-        // _menuAnimator.SetBool("Back To Menu", false);
-        // _menuAnimator.SetBool("1vCpu Selected", true);
+        _menuAnimator.SetTrigger("1vCPU Selection");
     }
 
-    public void BackToMenu()
+    public void DifficultyBackToLocal()
     {
-        // _menuAnimator.SetBool("Back To Menu", true);
-        // _menuAnimator.SetBool("1vCpu Selected", false);
+        _menuAnimator.SetTrigger("Back To Play Local");
     }
 
     public void VCpuStart(int p_difficulty)
     {
-        // _menuAnimator.SetTrigger("1vCpu Start");
-        // GameManager.instance.Difficulty = p_difficulty;
-        // GameManager.instance.currentState = GameStates.STARTING;
+        _menuAnimator.SetTrigger("1vCPU Start");
+        GameManager.instance.Difficulty = p_difficulty;
+        GameManager.instance.currentState = GameStates.STARTING;
     }
 }
