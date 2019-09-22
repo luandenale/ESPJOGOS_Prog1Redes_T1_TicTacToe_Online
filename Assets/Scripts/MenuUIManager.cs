@@ -54,4 +54,19 @@ public class MenuUIManager : MonoBehaviour
         GameManager.instance.Difficulty = p_difficulty;
         GameManager.instance.currentState = GameStates.STARTING;
     }
+
+    public void LanSelect()
+    {
+        _menuAnimator.SetTrigger("Pop Up Lobby");
+    }
+
+    public void InternetSelect()
+    {
+        _menuAnimator.SetTrigger("Pop Up Lobby");
+    }
+
+    public void CloseLobby()
+    {
+        _menuAnimator.SetTrigger("Pop Down Lobby");
+    }
 }

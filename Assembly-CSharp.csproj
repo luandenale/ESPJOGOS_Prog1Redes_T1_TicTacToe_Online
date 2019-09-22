@@ -59,6 +59,8 @@
      <Compile Include="Assets\Scripts\FallingPiecesManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\MenuUIManager.cs" />
+     <Compile Include="Assets\Scripts\Network Services\LANMatchManager.cs" />
+     <Compile Include="Assets\Scripts\Network Services\NetworkManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\SlotController.cs" />
      <Compile Include="Assets\Simple Helvetica\SimpleHelvetica.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
