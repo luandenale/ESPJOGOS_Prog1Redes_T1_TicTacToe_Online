@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuUIManager : MonoBehaviour
 {
+    [SerializeField]
+    private Text _popUpText;
     private Animator _menuAnimator;
 
     // Start is called before the first frame update
@@ -58,6 +61,34 @@ public class MenuUIManager : MonoBehaviour
     public void LanSelect()
     {
         _menuAnimator.SetTrigger("Pop Up Lobby");
+    }
+
+    public void CreateMatch()
+    {
+        _menuAnimator.SetTrigger("Pop Up Canvas");
+    }
+
+    public void WaitingOponent()
+    {
+        _menuAnimator.SetTrigger("Waiting Oponent");
+        _popUpText.text = "WAITING OPONENT...";
+    }
+
+    public void OponentConnected()
+    {
+        _menuAnimator.SetTrigger("Oponent Connected");
+        StartCoroutine(TextCountdown());
+    }
+
+    private IEnumerator TextCountdown()
+    {
+        _popUpText.text = "OPONENT CONNECTED\nSTARTING IN 3";
+        yield return new WaitForSeconds(1f);
+        _popUpText.text = "OPONENT CONNECTED\nSTARTING IN 2";
+        yield return new WaitForSeconds(1f);
+        _popUpText.text = "OPONENT CONNECTED\nSTARTING IN 1";
+        yield return new WaitForSeconds(1f);
+        _popUpText.text = "game started";
     }
 
     public void InternetSelect()
