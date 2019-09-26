@@ -76,6 +76,7 @@ public class MenuUIManager : MonoBehaviour
 
     public void OponentConnected()
     {
+        _menuAnimator.SetTrigger("Pop Up Canvas");
         _menuAnimator.SetTrigger("Oponent Connected");
         StartCoroutine(TextCountdown());
     }
