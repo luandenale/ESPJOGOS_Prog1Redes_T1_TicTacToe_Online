@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Work/Desktop/T1Prog1.exe
+C:/Users/19193111/Desktop/T1Prog1.exe
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
 SceneListEnd?

@@ -18,9 +18,12 @@ public class LANMatchManager : MonoBehaviour
     [SerializeField]
     private MenuUIManager _menuUIManager;
 
-    private readonly float _broadcastUpdateInterval = 0.5f;
+    private readonly float _broadcastUpdateInterval = 1f;
     private float _currentUpdateInterval;
     private bool _hasConnected;
+    private bool _searching = false;
+
+    private List<GameObject> _instantiatedGameObjects = new List<GameObject>();
 
     // Lista temporária utilizada para ler as partidas encontradas pelo Network Discovery.
     private List<NetworkBroadcastResult> _matches = new List<NetworkBroadcastResult>();
@@ -35,6 +38,7 @@ public class LANMatchManager : MonoBehaviour
         _matches.Clear();
         _searchMatchButton.SetActive(false);
         NetworkManagerSingleton.Discovery.StartAsClient();
+        _searching = true;
     }
 
     public void CreateMatch()
@@ -56,7 +60,7 @@ public class LANMatchManager : MonoBehaviour
     
     private void Update()
     {
-        if (!_hasConnected)
+        if (!_hasConnected && _searching)
         {
             _currentUpdateInterval -= Time.deltaTime;
             if (_currentUpdateInterval < 0)
@@ -87,27 +91,34 @@ public class LANMatchManager : MonoBehaviour
 
     private void RefreshMatches()
     {
+        foreach (GameObject __instance in _instantiatedGameObjects)
+        {
+            Destroy(__instance);
+        }
+        _matches.Clear();
+
         foreach (NetworkBroadcastResult __match in NetworkManagerSingleton.Discovery.broadcastsReceived.Values)
         {
-            if(_matches.Any(__item => EqualsArray(__item.broadcastData, __match.broadcastData)))
+            if (_matches.Any(__item => EqualsArray(__item.broadcastData, __match.broadcastData)))
             {
                 continue;
             }
 
-            _matches.Add(__match);
-
             string __matchName = Encoding.Unicode.GetString(__match.broadcastData);
 
-            GameObject __matchInstance = Instantiate(_matchPrefab, _matchPrefab.transform.position, _matchPrefab.transform.rotation);
-            __matchInstance.transform.localScale = new Vector3(1f, 1f, 1f);
-            __matchInstance.transform.parent = _matchesList.transform;
+            _matches.Add(__match);
 
+            GameObject __matchInstance = Instantiate(_matchPrefab, _matchPrefab.transform.position, _matchPrefab.transform.rotation, _matchesList.transform);
             __matchInstance.GetComponentsInChildren<Text>()[0].text = __matchName;
             __matchInstance.GetComponentInChildren<Button>().onClick.AddListener((delegate 
             {
                 OnMatchConnectClick(__match);
             }));
+
+            _instantiatedGameObjects.Add(__matchInstance);
         }
+
+        NetworkManagerSingleton.Discovery.broadcastsReceived.Clear();
     }
 
     private bool EqualsArray(byte[] left, byte[] right)
