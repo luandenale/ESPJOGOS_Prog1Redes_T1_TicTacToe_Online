@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/19193111/Desktop/T1Prog1.exe
+C:/Users/Work/Desktop/T1Prog1.exe
 SceneListBegin?
 Assets/Scenes/SampleScene.unity
 SceneListEnd?
@@ -166,3 +166,5 @@ a5b5fab2a56a102b93e009982dce61d2 Assembly-CSharp.dll:.SimpleHelvetica
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.NetworkPlayerInstance
+01b8b08be0277beedb198a85722957f6 Assembly-CSharp.dll:.NetworkGameManager

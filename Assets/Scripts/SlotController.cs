@@ -12,34 +12,39 @@ public class SlotController : MonoBehaviour
     private bool _reseted = false;
     private Animator _pieceAnimator;
 
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         _pieceAnimator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (GameManager.instance.currentState == GameStates.RESTART)
+        if(GameManager.instance != null)
         {
-            if (!_reseted)
+            if (GameManager.instance.currentState == GameStates.RESTART)
             {
-                GetComponent<BoxCollider>().enabled = true;
-                _pieceAnimator.Play("Empty Animation");
+                if (!_reseted)
+                {
+                    GetComponent<BoxCollider>().enabled = true;
+                    _pieceAnimator.Play("Empty Animation");
 
-                GameManager.instance.activatedSlots--;
-                _reseted = true;
-                selected = false;
+                    if(GameManager.instance != null)
+                        GameManager.instance.activatedSlots--;
+                    _reseted = true;
+                    selected = false;
+                }
             }
+            else
+                _reseted = false;
+
         }
-        else
-            _reseted = false;
     }
 
     public void SetSymbolToSlot(string p_symbol)
     {
         selected = true;
-        GameManager.instance.activatedSlots++;
+        if(GameManager.instance != null)
+            GameManager.instance.activatedSlots++;
         GetComponent<BoxCollider>().enabled = false;
 
         if (p_symbol == "x")
