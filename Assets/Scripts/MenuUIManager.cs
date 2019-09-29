@@ -71,25 +71,28 @@ public class MenuUIManager : MonoBehaviour
     public void WaitingOponent()
     {
         _menuAnimator.SetTrigger("Waiting Oponent");
-        _popUpText.text = "WAITING OPONENT...";
+        _popUpText.text = "WAITING OPPONENT...";
     }
 
     public void OponentConnected()
     {
         _menuAnimator.SetTrigger("Pop Up Canvas");
-        _menuAnimator.SetTrigger("Oponent Connected");
+        _menuAnimator.SetTrigger("Oponnent Connected");
         StartCoroutine(TextCountdown());
     }
 
     private IEnumerator TextCountdown()
     {
-        _popUpText.text = "OPONENT CONNECTED\nSTARTING IN 3";
+        _popUpText.text = "OPPONENT CONNECTED\nSTARTING IN 3";
         yield return new WaitForSeconds(1f);
-        _popUpText.text = "OPONENT CONNECTED\nSTARTING IN 2";
+        _popUpText.text = "OPPONENT CONNECTED\nSTARTING IN 2";
         yield return new WaitForSeconds(1f);
-        _popUpText.text = "OPONENT CONNECTED\nSTARTING IN 1";
+        _popUpText.text = "OPPONENT CONNECTED\nSTARTING IN 1";
         yield return new WaitForSeconds(1f);
         _popUpText.text = "game started";
+
+        _menuAnimator.SetTrigger("Online Start");
+        NetworkGameManager.instance.currentState = NetworkGameStates.STARTING;
     }
 
     public void InternetSelect()

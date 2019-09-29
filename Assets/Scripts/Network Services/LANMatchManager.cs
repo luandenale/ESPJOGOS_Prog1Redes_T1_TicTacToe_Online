@@ -43,7 +43,8 @@ public class LANMatchManager : MonoBehaviour
 
     public void CreateMatch()
     {
-        NetworkManagerSingleton.Discovery.StopBroadcast();
+        if(_searching)
+            NetworkManagerSingleton.Discovery.StopBroadcast();
 
         NetworkManagerSingleton.Discovery.broadcastData = _matchName.text;
 

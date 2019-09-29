@@ -25,8 +25,14 @@ public class BoardController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.currentState != GameStates.RESTART)
+        if(GameManager.instance != null)
+        {
+            if (GameManager.instance.currentState != GameStates.RESTART)
+                UpdateSlots();
+        }else
+        {
             UpdateSlots();
+        }
     }
 
     void UpdateSlots()
@@ -140,15 +146,31 @@ public class BoardController : MonoBehaviour
             if (p_mainCheck)
             {
                 if (__whoWon == "x")
-                    GameManager.instance.currentState = GameStates.X_WON;
+                {
+                    if(GameManager.instance != null)
+                        GameManager.instance.currentState = GameStates.X_WON;
+                    else
+                        NetworkGameManager.instance.currentState = NetworkGameStates.X_WON;
+                }
+                    
                 else
-                    GameManager.instance.currentState = GameStates.O_WON;
+                {
+                    if(GameManager.instance != null)
+                        GameManager.instance.currentState = GameStates.O_WON;
+                    else
+                        NetworkGameManager.instance.currentState = NetworkGameStates.O_WON;
+                }
 
                 SetWinningLine(__xPos, __yPos, __diagonalLine);
             }
         }
         else if(__gameEnded && p_mainCheck)
-            GameManager.instance.currentState = GameStates.TIE;
+        {
+            if(GameManager.instance != null)
+                GameManager.instance.currentState = GameStates.TIE;
+            else
+                NetworkGameManager.instance.currentState = NetworkGameStates.TIE;
+        }
 
         return Tuple.Create(__gameEnded, __whoWon);
     }

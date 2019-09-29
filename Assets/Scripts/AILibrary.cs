@@ -90,7 +90,7 @@ public class AILibrary : MonoBehaviour
     }
 
     // Método recursivo do Minimax que retorna o rank e a profundidade
-    Tuple<int, int> MiniMax(string[,] p_board, bool p_playerTurn, int p_deep, BoardController p_boardController)
+    private Tuple<int, int> MiniMax(string[,] p_board, bool p_playerTurn, int p_deep, BoardController p_boardController)
     {
         int __deep = p_deep + 1;
 
@@ -151,7 +151,7 @@ public class AILibrary : MonoBehaviour
         return Tuple.Create(__val, __deep);
     }
 
-    int CalcScore(string p_whoWon)
+    private int CalcScore(string p_whoWon)
     {
         if (p_whoWon == "x")
             return -1;
