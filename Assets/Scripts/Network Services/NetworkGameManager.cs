@@ -29,16 +29,6 @@ public class NetworkGameManager : MonoBehaviour
     private bool _notPlayed = true;
     private bool _startsPlaying = true;
     private bool _gameEnded = false;
-    
-    private string _currentPlayer = "x";
-    public string CurrentPlayer
-    {
-        get
-        {
-            return _currentPlayer;
-        }
-    }
-
     public BoardController boardController;
     public static NetworkGameManager instance = null;
     public NetworkGameStates currentState = NetworkGameStates.MENU;
@@ -167,28 +157,20 @@ public class NetworkGameManager : MonoBehaviour
 
         currentState = NetworkGameStates.RUNNING;
     }
-    
-    void SwitchPlayer()
-    {
-        if(_currentPlayer == "x")
-            _currentPlayer = "o";
-        else
-            _currentPlayer = "x";
-    }
 
-    void ResetGame()
-    {
-        _notPlayed = true;
-        _gameEnded = false;
-        if (_startsPlaying)
-        {
-            _currentPlayer = "x";
-        }
-        else
-        {
-            _currentPlayer = "o";
-        }
-        _fallingPieces.ResetPieces();
-        boardController.ResetBoard();
-    }
+    // void ResetGame()
+    // {
+    //     _notPlayed = true;
+    //     _gameEnded = false;
+    //     if (_startsPlaying)
+    //     {
+    //         _currentPlayer = "x";
+    //     }
+    //     else
+    //     {
+    //         _currentPlayer = "o";
+    //     }
+    //     _fallingPieces.ResetPieces();
+    //     boardController.ResetBoard();
+    // }
 }

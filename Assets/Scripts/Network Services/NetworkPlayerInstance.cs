@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class NetworkPlayerInstance : NetworkBehaviour 
 {
+    private string _lastPlayer = "o";
     private void Start()
     {
         if (isServer)
@@ -17,7 +18,7 @@ public class NetworkPlayerInstance : NetworkBehaviour
     [Command]
     private void CmdDoMove(int p_xPos, int p_yPos, string p_playerSymbol)
     {
-        NetworkPlayerHandler.UpdateValue(p_xPos, p_xPos, p_playerSymbol, true);
+        NetworkPlayerHandler.UpdateValue(p_xPos, p_yPos, p_playerSymbol, true);
     }
 
     // Chamado pelo servidor, executa no cliente
@@ -27,6 +28,7 @@ public class NetworkPlayerInstance : NetworkBehaviour
         // garante que só é chamado no player que é dono do objeto
         if (!isLocalPlayer) return;
 
+        _lastPlayer = p_playerSymbol;
         NetworkPlayerHandler.UpdateValue(p_xPos, p_yPos, p_playerSymbol, false);
     }
 
@@ -40,7 +42,8 @@ public class NetworkPlayerInstance : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        ClickSquare();
+        if((isServer && _lastPlayer == "o") || (!isServer && _lastPlayer == "x"))
+            ClickSquare();
     }
 
     private void ClickSquare()
