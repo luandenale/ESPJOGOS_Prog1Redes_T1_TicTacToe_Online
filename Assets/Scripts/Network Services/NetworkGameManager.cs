@@ -24,7 +24,7 @@ public class NetworkGameManager : MonoBehaviour
     [SerializeField] Animator _fadeAnimator;
 
     //private AudioManager _audioManager;
-    // private Text _currentPlayerText;
+    [SerializeField] Text _currentPlayerText;
     //private Animator _currentPlayerAnimator;
     private bool _notPlayed = true;
     private bool _startsPlaying = true;
@@ -33,6 +33,8 @@ public class NetworkGameManager : MonoBehaviour
     public static NetworkGameManager instance = null;
     public NetworkGameStates currentState = NetworkGameStates.MENU;
     public int activatedSlots = 0;
+
+    public string currentPlayer = "x";
 
     private void Start()
     {
@@ -56,7 +58,7 @@ public class NetworkGameManager : MonoBehaviour
                 StartCoroutine(StartAnimation());
                 break;
             case NetworkGameStates.RUNNING:
-                // _currentPlayerText.text = "PLAYER '" + _currentPlayer.ToUpper() + "' TURN...";
+                _currentPlayerText.text = "PLAYER '" + currentPlayer.ToUpper() + "' TURN...";
                 // if (_cpuTurn && _cpuPlaying && _notPlayed)
                 //     StartCoroutine(CPUPlay());
                 // else if(!_cpuTurn)
@@ -68,7 +70,7 @@ public class NetworkGameManager : MonoBehaviour
                 {
                     _gameEnded = true;
                     // _currentPlayerAnimator.SetBool("Glow", false);
-                    // _currentPlayerText.text = "'O' PLAYER WON!";
+                    _currentPlayerText.text = "'O' PLAYER WON!";
                 
                     _fallingPieces.FallPieces("o");
                     // _audioManager.PlayWinYay();
@@ -79,14 +81,14 @@ public class NetworkGameManager : MonoBehaviour
                 {
                     _gameEnded = true;
                     // _currentPlayerAnimator.SetBool("Glow", false);
-                    // _currentPlayerText.text = "'X' PLAYER WON!";
+                    _currentPlayerText.text = "'X' PLAYER WON!";
                     _fallingPieces.FallPieces("x");
                     // _audioManager.PlayWinYay();
                 }
                 break;
             case NetworkGameStates.TIE:
                 //  _currentPlayerAnimator.SetBool("Glow", false);
-                //  _currentPlayerText.text = "GAME TIED";
+                _currentPlayerText.text = "GAME TIED";
                  break;
             // case NetworkGameStates.RESTART:
             //     ResetGame();

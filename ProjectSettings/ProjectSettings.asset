@@ -611,10 +611,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 2e81261f-529e-4d2e-8557-71227840e060
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: T1Prog1
+  organizationId: denale
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

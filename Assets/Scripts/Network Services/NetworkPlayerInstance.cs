@@ -42,7 +42,12 @@ public class NetworkPlayerInstance : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        if((isServer && _lastPlayer == "o") || (!isServer && _lastPlayer == "x"))
+        if(_lastPlayer == "x")
+            NetworkGameManager.instance.currentPlayer = "o";
+        else
+            NetworkGameManager.instance.currentPlayer = "x";
+
+        if ((isServer && _lastPlayer == "o") || (!isServer && _lastPlayer == "x"))
             ClickSquare();
     }
 
@@ -63,7 +68,7 @@ public class NetworkPlayerInstance : NetworkBehaviour
                     __playerSymbol = "x";
                 else
                     __playerSymbol = "o";
-                
+
                 // Avisa servidor qual posição cliquei e que símbolo sou
                 CmdDoMove(__slot.xPos, __slot.yPos, __playerSymbol);
             }

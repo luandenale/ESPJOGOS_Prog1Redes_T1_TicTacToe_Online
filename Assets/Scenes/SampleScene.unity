@@ -3557,9 +3557,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fallingPieces: {fileID: 1191372982}
   _fadeAnimator: {fileID: 1427504996}
+  _currentPlayerText: {fileID: 2043966606}
   boardController: {fileID: 1504723394}
   currentState: 0
   activatedSlots: 0
+  currentPlayer: x
 --- !u!1 &559241770
 GameObject:
   m_ObjectHideFlags: 0
@@ -12587,7 +12589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 20}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2043966606
