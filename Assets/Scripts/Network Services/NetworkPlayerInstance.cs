@@ -43,12 +43,22 @@ public class NetworkPlayerInstance : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         if(_lastPlayer == "x")
-            NetworkGameManager.instance.currentPlayer = "o";
+        {
+            if(isServer)
+                NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
+            else
+                NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'O'";
+        }
         else
-            NetworkGameManager.instance.currentPlayer = "x";
+        {
+            if(isServer)
+                NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'X'";
+            else
+                NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
+        }
 
-        if ((isServer && _lastPlayer == "o") || (!isServer && _lastPlayer == "x"))
-            ClickSquare();
+        ClickSquare();
+
     }
 
     private void ClickSquare()

@@ -34,7 +34,8 @@ public class NetworkGameManager : MonoBehaviour
     public NetworkGameStates currentState = NetworkGameStates.MENU;
     public int activatedSlots = 0;
 
-    public string currentPlayer = "x";
+    public string currentPlay = "";
+
 
     private void Start()
     {
@@ -58,7 +59,7 @@ public class NetworkGameManager : MonoBehaviour
                 StartCoroutine(StartAnimation());
                 break;
             case NetworkGameStates.RUNNING:
-                _currentPlayerText.text = "PLAYER '" + currentPlayer.ToUpper() + "' TURN...";
+                _currentPlayerText.text = currentPlay;
                 // if (_cpuTurn && _cpuPlaying && _notPlayed)
                 //     StartCoroutine(CPUPlay());
                 // else if(!_cpuTurn)
