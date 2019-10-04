@@ -150,7 +150,7 @@ public class BoardController : MonoBehaviour
                     if(GameManager.instance != null)
                         GameManager.instance.currentState = GameStates.X_WON;
                     else
-                        NetworkGameManager.instance.currentState = NetworkGameStates.X_WON;
+                        NetworkGameManager.instance.currentState = GameStates.X_WON;
                 }
                     
                 else
@@ -158,7 +158,7 @@ public class BoardController : MonoBehaviour
                     if(GameManager.instance != null)
                         GameManager.instance.currentState = GameStates.O_WON;
                     else
-                        NetworkGameManager.instance.currentState = NetworkGameStates.O_WON;
+                        NetworkGameManager.instance.currentState = GameStates.O_WON;
                 }
 
                 SetWinningLine(__xPos, __yPos, __diagonalLine);
@@ -169,7 +169,7 @@ public class BoardController : MonoBehaviour
             if(GameManager.instance != null)
                 GameManager.instance.currentState = GameStates.TIE;
             else
-                NetworkGameManager.instance.currentState = NetworkGameStates.TIE;
+                NetworkGameManager.instance.currentState = GameStates.TIE;
         }
 
         return Tuple.Create(__gameEnded, __whoWon);

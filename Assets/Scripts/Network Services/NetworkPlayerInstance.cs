@@ -47,17 +47,23 @@ public class NetworkPlayerInstance : NetworkBehaviour
             if(isServer)
                 NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
             else
+            {
                 NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'O'";
+                ClickSquare();
+            }
         }
         else
         {
             if(isServer)
+            {
                 NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'X'";
+                ClickSquare();
+            }
             else
                 NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
         }
 
-        ClickSquare();
+        
 
     }
 

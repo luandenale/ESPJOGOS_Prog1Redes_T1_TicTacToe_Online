@@ -5,33 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public enum NetworkGameStates
-{
-    MENU,
-    STARTING,
-    RUNNING,
-    RESTART,
-    X_WON,
-    O_WON,
-    TIE
-}
-
 public class NetworkGameManager : MonoBehaviour
 {
     //[SerializeField] GameObject _currentPlayerUIGameObject;
-    //[SerializeField] Animator _inGameButtonsAnimator;
+    [SerializeField] Animator _inGameButtonsAnimator;
     [SerializeField] FallingPiecesManager _fallingPieces;
     [SerializeField] Animator _fadeAnimator;
 
     //private AudioManager _audioManager;
     [SerializeField] Text _currentPlayerText;
     //private Animator _currentPlayerAnimator;
-    private bool _notPlayed = true;
-    private bool _startsPlaying = true;
     private bool _gameEnded = false;
     public BoardController boardController;
     public static NetworkGameManager instance = null;
-    public NetworkGameStates currentState = NetworkGameStates.MENU;
+    public GameStates currentState = GameStates.MENU;
     public int activatedSlots = 0;
 
     public string currentPlay = "";
@@ -55,18 +42,14 @@ public class NetworkGameManager : MonoBehaviour
     {
         switch (currentState)
         {
-            case NetworkGameStates.STARTING:
+            case GameStates.STARTING:
                 StartCoroutine(StartAnimation());
                 break;
-            case NetworkGameStates.RUNNING:
+            case GameStates.RUNNING:
                 _currentPlayerText.text = currentPlay;
-                // if (_cpuTurn && _cpuPlaying && _notPlayed)
-                //     StartCoroutine(CPUPlay());
-                // else if(!_cpuTurn)
-                //     ClickSquare();
                 boardController.CheckEndGame(null, true);
                 break;
-            case NetworkGameStates.O_WON:
+            case GameStates.O_WON:
                 if (!_gameEnded)
                 {
                     _gameEnded = true;
@@ -77,7 +60,7 @@ public class NetworkGameManager : MonoBehaviour
                     // _audioManager.PlayWinYay();
                 }
                 break;
-            case NetworkGameStates.X_WON:
+            case GameStates.X_WON:
                 if (!_gameEnded)
                 {
                     _gameEnded = true;
@@ -87,24 +70,23 @@ public class NetworkGameManager : MonoBehaviour
                     // _audioManager.PlayWinYay();
                 }
                 break;
-            case NetworkGameStates.TIE:
+            case GameStates.TIE:
                 //  _currentPlayerAnimator.SetBool("Glow", false);
                 _currentPlayerText.text = "GAME TIED";
                  break;
-            // case NetworkGameStates.RESTART:
-            //     ResetGame();
-            //     break;
+            case GameStates.RESTART:
+                ResetGame();
+                break;
             default:
                 break;
         }
 
         // Checking if board was reseted (no activated slots)
-        // if (activatedSlots <= 0 && currentState == GameStates.RESTART)
-        // {
-        //     _currentPlayerAnimator.SetBool("Glow", true);
-        //     activatedSlots = 0;
-        //     currentState = GameStates.RUNNING;
-        // }
+        if (activatedSlots <= 0 && currentState == GameStates.RESTART)
+        {
+            activatedSlots = 0;
+            currentState = GameStates.RUNNING;
+        }
     }
 
     // Called only from UI
@@ -121,33 +103,33 @@ public class NetworkGameManager : MonoBehaviour
     // }
 
     // Called only from UI
-    // public void ActivateRestart()
-    // {
-    //     StartCoroutine(RestartAnimation());
-    // }
+    public void ActivateRestart()
+    {
+        StartCoroutine(RestartAnimation());
+    }
 
-    // IEnumerator RestartAnimation()
-    // {
-    //     _fadeAnimator.Play("FadeOut");
-    //     yield return new WaitForSeconds(0.5f);
-    //     currentState = NetworkGameStates.RESTART;
-    //     _fadeAnimator.Play("FadeIn");
-    //     yield return new WaitForSeconds(0.5f);
-    // }
+    IEnumerator RestartAnimation()
+    {
+        _fadeAnimator.Play("FadeOut");
+        yield return new WaitForSeconds(0.5f);
+        currentState = GameStates.RESTART;
+        _fadeAnimator.Play("FadeIn");
+        yield return new WaitForSeconds(0.5f);
+    }
 
     // Called only from UI
-    // public void ReloadAllGame()
-    // {
-    //     StartCoroutine(ReloadGameAnimation());
-    // }
+    public void ReloadAllGame()
+    {
+        StartCoroutine(ReloadGameAnimation());
+    }
 
-    // IEnumerator ReloadGameAnimation()
-    // {
-    //     _fadeAnimator.Play("FadeOut");
-    //     yield return new WaitForSeconds(0.5f);
-    //     Destroy(gameObject);
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    // }
+    IEnumerator ReloadGameAnimation()
+    {
+        _fadeAnimator.Play("FadeOut");
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     IEnumerator StartAnimation()
     {
@@ -156,24 +138,16 @@ public class NetworkGameManager : MonoBehaviour
         yield return new WaitForSeconds(1.35f);
 
         // _currentPlayerAnimator.SetTrigger("Initiate");
-        // _inGameButtonsAnimator.SetTrigger("SlideIn");
+        _inGameButtonsAnimator.SetTrigger("SlideIn");
 
-        currentState = NetworkGameStates.RUNNING;
+        currentState = GameStates.RUNNING;
     }
 
-    // void ResetGame()
-    // {
-    //     _notPlayed = true;
-    //     _gameEnded = false;
-    //     if (_startsPlaying)
-    //     {
-    //         _currentPlayer = "x";
-    //     }
-    //     else
-    //     {
-    //         _currentPlayer = "o";
-    //     }
-    //     _fallingPieces.ResetPieces();
-    //     boardController.ResetBoard();
-    // }
+    private void ResetGame()
+    {
+        _gameEnded = false;
+        currentPlay = "";
+        _fallingPieces.ResetPieces();
+        boardController.ResetBoard();
+    }
 }

@@ -58,13 +58,15 @@
      <Compile Include="Assets\Scripts\BoardController.cs" />
      <Compile Include="Assets\Scripts\FallingPiecesManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\MenuUIManager.cs" />
+     <Compile Include="Assets\Scripts\GameMode.cs" />
      <Compile Include="Assets\Scripts\Network Services\LANMatchManager.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkGameManager.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkPlayerHandler.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkPlayerInstance.cs" />
      <Compile Include="Assets\Scripts\SlotController.cs" />
+     <Compile Include="Assets\Scripts\UI\InGameButtonsProxy.cs" />
+     <Compile Include="Assets\Scripts\UI\MenuUIManager.cs" />
      <Compile Include="Assets\Simple Helvetica\SimpleHelvetica.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

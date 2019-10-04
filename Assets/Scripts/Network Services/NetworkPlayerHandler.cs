@@ -7,7 +7,7 @@ public static class NetworkPlayerHandler
 {
 
     private static BoardController _boardController;
-    public static NetworkGameStates _currentState = NetworkGameStates.MENU;
+    public static GameStates _currentState = GameStates.MENU;
     
     private static int[] _stateValues = new int[5];
 
