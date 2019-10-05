@@ -9,7 +9,7 @@ public class InGameButtonsProxy : MonoBehaviour
         if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
             GameManager.instance.ActivateRestart();
         else
-            NetworkGameManager.instance.ActivateRestart();
+            NetworkGameManager.instance.setToRestart = true;
     }
 
     public void ToMenu()

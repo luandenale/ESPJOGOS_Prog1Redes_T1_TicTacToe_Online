@@ -28,15 +28,30 @@ public class SlotController : MonoBehaviour
                     GetComponent<BoxCollider>().enabled = true;
                     _pieceAnimator.Play("Empty Animation");
 
-                    if(GameManager.instance != null)
-                        GameManager.instance.activatedSlots--;
+                    GameManager.instance.activatedSlots--;
                     _reseted = true;
                     selected = false;
                 }
             }
             else
                 _reseted = false;
+        }
+        else
+        {
+            if (NetworkGameManager.instance.currentState == GameStates.RESTART)
+            {
+                if (!_reseted)
+                {
+                    GetComponent<BoxCollider>().enabled = true;
+                    _pieceAnimator.Play("Empty Animation");
 
+                    NetworkGameManager.instance.activatedSlots--;
+                    _reseted = true;
+                    selected = false;
+                }
+            }
+            else
+                _reseted = false;
         }
     }
 
@@ -45,6 +60,8 @@ public class SlotController : MonoBehaviour
         selected = true;
         if(GameManager.instance != null)
             GameManager.instance.activatedSlots++;
+        else
+            NetworkGameManager.instance.activatedSlots++;
         GetComponent<BoxCollider>().enabled = false;
 
         if (p_symbol == "x")

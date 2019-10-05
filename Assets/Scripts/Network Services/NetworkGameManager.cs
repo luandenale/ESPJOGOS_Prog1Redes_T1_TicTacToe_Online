@@ -21,6 +21,8 @@ public class NetworkGameManager : MonoBehaviour
     public GameStates currentState = GameStates.MENU;
     public int activatedSlots = 0;
 
+    public bool setToRestart = false;
+
     public string currentPlay = "";
 
 
@@ -89,22 +91,11 @@ public class NetworkGameManager : MonoBehaviour
         }
     }
 
-    // Called only from UI
-    // public void ToggleCPUStart()
-    // {
-    //     _cpuTurn = !_cpuTurn;
+    
 
-    //     _startsPlaying = !_cpuTurn;
-
-    //     if (_cpuTurn)
-    //         _currentPlayer = "o";
-    //     else
-    //         _currentPlayer = "x";
-    // }
-
-    // Called only from UI
     public void ActivateRestart()
     {
+        setToRestart = false;
         StartCoroutine(RestartAnimation());
     }
 
@@ -145,6 +136,7 @@ public class NetworkGameManager : MonoBehaviour
 
     private void ResetGame()
     {
+        Debug.Log("hello");
         _gameEnded = false;
         currentPlay = "";
         _fallingPieces.ResetPieces();

@@ -8,8 +8,6 @@ public static class NetworkPlayerHandler
 
     private static BoardController _boardController;
     public static GameStates _currentState = GameStates.MENU;
-    
-    private static int[] _stateValues = new int[5];
 
     public static event Action OnStateUpdated;
 
@@ -19,6 +17,14 @@ public static class NetworkPlayerHandler
     public static void RegisterPlayer(NetworkPlayerInstance player)
     {
         _players.Add(player);
+    }
+
+    public static void ResetBoard()
+    {
+        foreach (var player in _players)
+        {
+            player.ResetBoard();
+        }
     }
 
     public static void UpdateValue(int p_xPos, int p_yPos, string p_playerSymbol, bool isServer)
@@ -41,12 +47,5 @@ public static class NetworkPlayerHandler
                 player.UpdateValue(p_xPos, p_yPos, p_playerSymbol);
             }
         }
-    }
-
-    public static int GetValue(int pos)
-    {
-        return _stateValues[pos];
-    }
-
-    
+    }    
 }
