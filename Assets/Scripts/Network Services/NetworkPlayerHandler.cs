@@ -27,6 +27,14 @@ public static class NetworkPlayerHandler
         }
     }
 
+    public static void ToMenu()
+    {
+        foreach (var player in _players)
+        {
+            player.ToMenu();
+        }
+    }
+
     public static void UpdateValue(int p_xPos, int p_yPos, string p_playerSymbol, bool isServer)
     {
         _boardController = NetworkGameManager.instance.boardController;

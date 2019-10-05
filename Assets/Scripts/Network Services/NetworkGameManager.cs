@@ -22,6 +22,7 @@ public class NetworkGameManager : MonoBehaviour
     public int activatedSlots = 0;
 
     public bool setToRestart = false;
+    public bool setToMenu = false;
 
     public string currentPlay = "";
 

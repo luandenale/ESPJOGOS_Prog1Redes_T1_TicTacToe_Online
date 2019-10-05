@@ -31,6 +31,32 @@ public class NetworkPlayerInstance : NetworkBehaviour
         NetworkGameManager.instance.ActivateRestart();
     }
 
+    public void ResetBoard()
+    {
+        RpcResetBoard();
+    }
+
+    [Command]
+    private void CmdToMenu()
+    {
+        NetworkPlayerHandler.ToMenu();
+    }
+
+    // Chamado pelo servidor, executa no cliente
+    [ClientRpc]
+    private void RpcToMenu()
+    {
+        // garante que só é chamado no player que é dono do objeto
+        if (!isLocalPlayer) return;
+
+        NetworkGameManager.instance.ReloadAllGame();
+    }
+
+    public void ToMenu()
+    {
+        RpcToMenu();
+    }
+
     // Chamado pelo cliente, executa no servidor
     [Command]
     private void CmdDoMove(int p_xPos, int p_yPos, string p_playerSymbol)
@@ -49,10 +75,6 @@ public class NetworkPlayerInstance : NetworkBehaviour
         NetworkPlayerHandler.UpdateValue(p_xPos, p_yPos, p_playerSymbol, false);
     }
 
-    public void ResetBoard()
-    {
-        RpcResetBoard();
-    }
 
     // Roda apenas no servidor. Replica atualização para os clientes.
     public void UpdateValue(int p_xPos, int p_yPos, string p_playerSymbol)
@@ -86,7 +108,9 @@ public class NetworkPlayerInstance : NetworkBehaviour
         }
 
         // Should restart everybody
-        if(NetworkGameManager.instance.setToRestart)
+        if(NetworkGameManager.instance.setToMenu)
+            CmdToMenu();
+        else if(NetworkGameManager.instance.setToRestart)
             CmdResetBoard();
 
     }

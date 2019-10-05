@@ -17,6 +17,6 @@ public class InGameButtonsProxy : MonoBehaviour
         if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
             GameManager.instance.ReloadAllGame();
         else
-            NetworkGameManager.instance.ReloadAllGame();
+            NetworkGameManager.instance.setToMenu = true;
     }
 }

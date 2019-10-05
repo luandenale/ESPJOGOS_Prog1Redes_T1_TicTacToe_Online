@@ -88,6 +88,7 @@ public class LANMatchManager : MonoBehaviour
     private void OnServerConnect(NetworkConnection conn)
     {
         _menuUIManager.OponentConnected();
+        NetworkManagerSingleton.Discovery.StopBroadcast();
     }
 
     private void RefreshMatches()
