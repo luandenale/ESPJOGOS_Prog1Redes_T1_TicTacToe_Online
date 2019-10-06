@@ -38,13 +38,7 @@ public static class NetworkPlayerHandler
     public static void UpdateValue(int p_xPos, int p_yPos, string p_playerSymbol, bool isServer)
     {
         _boardController = NetworkGameManager.instance.boardController;
-        //Debug.Log($"UpdateValue called! pos:{pos} val:{val} isServer:{isServer}");
 
-        // _stateValues[pos] = val;
-        // OnStateUpdated?.Invoke();
-
-        //Update my board
-        //_boardController.CheckEndGame(null, true);
         _boardController.Board[p_xPos, p_yPos] = p_playerSymbol;
 
         //Avisa clientes para atualizarem seus boards

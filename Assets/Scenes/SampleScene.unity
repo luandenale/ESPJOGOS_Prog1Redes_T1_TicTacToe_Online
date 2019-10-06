@@ -3562,6 +3562,8 @@ MonoBehaviour:
   boardController: {fileID: 1504723394}
   currentState: 0
   activatedSlots: 0
+  setToRestart: 0
+  setToMenu: 0
   currentPlay: 
 --- !u!1 &559241770
 GameObject:
@@ -4351,6 +4353,7 @@ GameObject:
   - component: {fileID: 717479216}
   - component: {fileID: 717479215}
   - component: {fileID: 717479214}
+  - component: {fileID: 717479217}
   m_Layer: 5
   m_Name: Internet Button
   m_TagString: Untagged
@@ -4479,6 +4482,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717479212}
   m_CullTransparentMesh: 0
+--- !u!114 &717479217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717479212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33184246563f8b40b2ded85ad4ce618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _matchName: {fileID: 1523077581}
+  _matchesList: {fileID: 856243702}
+  _matchPrefab: {fileID: 3093127563998100922, guid: 40a89368ed323cc47959f12dfc6e56a7,
+    type: 3}
+  _searchMatchButton: {fileID: 1349894617}
+  _menuUIManager: {fileID: 1026986124}
 --- !u!1 &728351203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4684,7 +4705,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 494245300}
+      - m_Target: {fileID: 1026986124}
         m_MethodName: CreateMatch
         m_Mode: 1
         m_Arguments:
@@ -4695,7 +4716,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1026986124}
+      - m_Target: {fileID: 717479217}
         m_MethodName: CreateMatch
         m_Mode: 1
         m_Arguments:
@@ -8170,7 +8191,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 494245300}
+      - m_Target: {fileID: 717479217}
         m_MethodName: SearchForMatches
         m_Mode: 1
         m_Arguments:

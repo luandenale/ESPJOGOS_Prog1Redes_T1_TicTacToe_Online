@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\Network Services\NetworkManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkPlayerHandler.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkPlayerInstance.cs" />
+     <Compile Include="Assets\Scripts\Network Services\OnlineMatchManager.cs" />
      <Compile Include="Assets\Scripts\SlotController.cs" />
      <Compile Include="Assets\Scripts\UI\InGameButtonsProxy.cs" />
      <Compile Include="Assets\Scripts\UI\MenuUIManager.cs" />

@@ -100,6 +100,7 @@ public class MenuUIManager : MonoBehaviour
 
     public void InternetSelect()
     {
+        GameMode.mode = Mode.ONLINE;
         _menuAnimator.SetTrigger("Pop Up Lobby");
     }
 

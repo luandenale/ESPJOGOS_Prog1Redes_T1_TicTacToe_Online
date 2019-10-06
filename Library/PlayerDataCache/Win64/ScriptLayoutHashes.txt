@@ -169,3 +169,4 @@ a5b5fab2a56a102b93e009982dce61d2 Assembly-CSharp.dll:.SimpleHelvetica
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
+6eab90b894261607209906d42b9ac068 Assembly-CSharp.dll:.OnlineMatchManager
