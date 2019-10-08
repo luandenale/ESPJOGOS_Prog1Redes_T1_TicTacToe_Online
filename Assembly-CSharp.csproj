@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\SlotController.cs" />
      <Compile Include="Assets\Scripts\UI\InGameButtonsProxy.cs" />
      <Compile Include="Assets\Scripts\UI\MenuUIManager.cs" />
+     <Compile Include="Assets\Scripts\UI\NetworkConnectionProxy.cs" />
      <Compile Include="Assets\Simple Helvetica\SimpleHelvetica.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

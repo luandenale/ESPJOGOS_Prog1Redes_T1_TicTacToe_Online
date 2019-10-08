@@ -117,6 +117,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+6eab90b894261607209906d42b9ac068 Assembly-CSharp.dll:.OnlineMatchManager
 2a1a7f2c81dd5fa38003756691e0d0ce Assembly-CSharp.dll:.AudioManager
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -169,4 +170,4 @@ a5b5fab2a56a102b93e009982dce61d2 Assembly-CSharp.dll:.SimpleHelvetica
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-6eab90b894261607209906d42b9ac068 Assembly-CSharp.dll:.OnlineMatchManager
+b3b947a87fd0363f30b7ed13658d96d5 Assembly-CSharp.dll:.NetworkConnectionProxy

@@ -55,6 +55,18 @@ public class NetworkPlayerInstance : NetworkBehaviour
     public void ToMenu()
     {
         RpcToMenu();
+        // GameDisconnect();
+    }
+
+    private void GameDisconnect()
+    {
+        if(isServer)
+            NetworkManagerSingleton.singleton.StopHost();
+        else
+        {
+            NetworkClient.ShutdownAll();
+            NetworkManagerSingleton.singleton.StopClient();            
+        }
     }
 
     // Chamado pelo cliente, executa no servidor

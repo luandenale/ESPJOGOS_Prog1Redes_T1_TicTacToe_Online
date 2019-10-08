@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 7308172}
   - component: {fileID: 7308171}
   - component: {fileID: 7308170}
+  - component: {fileID: 7308173}
   m_Layer: 5
   m_Name: Lobby
   m_TagString: Untagged
@@ -214,6 +215,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &7308173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed80d245744f7341bc4e5e5e3bb0103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lanMatchManager: {fileID: 494245300}
+  _onlineMatchManager: {fileID: 717479217}
 --- !u!4 &25312691 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2815179074764871162, guid: 8672f74b3d9852040a0310115fbdcb45,
@@ -4716,7 +4731,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 717479217}
+      - m_Target: {fileID: 7308173}
         m_MethodName: CreateMatch
         m_Mode: 1
         m_Arguments:
@@ -8191,8 +8206,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 717479217}
-        m_MethodName: SearchForMatches
+      - m_Target: {fileID: 7308173}
+        m_MethodName: SearchMatch
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
