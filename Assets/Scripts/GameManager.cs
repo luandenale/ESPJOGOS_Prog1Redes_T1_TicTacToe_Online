@@ -23,11 +23,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Animator _inGameButtonsAnimator;
     [SerializeField] FallingPiecesManager _fallingPieces;
     [SerializeField] Animator _fadeAnimator;
+    [SerializeField] AILibrary _ai;
+    [SerializeField] AudioManager _audioManager;
 
-    private AudioManager _audioManager;
     private Text _currentPlayerText;
     private Animator _currentPlayerAnimator;
-    private AILibrary _ai;
     private bool _cpuPlaying = false;
     private bool _cpuTurn = false;
     private bool _notPlayed = true;

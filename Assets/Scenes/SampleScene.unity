@@ -3451,9 +3451,8 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669906}
   - component: {fileID: 534669907}
-  - component: {fileID: 534669908}
+  - component: {fileID: 534669906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3523,6 +3522,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 804955250}
+  - {fileID: 974746782}
+  - {fileID: 2029616942}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3533,19 +3534,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02c3d6e119c431b44a751f20ef5ffaec, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b8fea2ac9d3ccb47a37a9e10f3684dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPlayerUIGameObject: {fileID: 2043966604}
-  _boardController: {fileID: 1504723394}
-  _inGameButtonsAnimator: {fileID: 1110173214}
-  _fallingPieces: {fileID: 1191372982}
-  _fadeAnimator: {fileID: 1427504996}
-  currentState: 0
-  activatedSlots: 0
-  useDeep: 0
+  _gameManagerObject: {fileID: 974746781}
+  _networkGameManagerObject: {fileID: 2029616941}
 --- !u!114 &534669907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3558,28 +3553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac53c393563242b4aa208aa65b1b3489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &534669908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0330442356b4bbb40a0f121c79464545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inGameButtonsAnimator: {fileID: 1110173214}
-  _fallingPieces: {fileID: 1191372982}
-  _fadeAnimator: {fileID: 1427504996}
-  _currentPlayerText: {fileID: 2043966606}
-  boardController: {fileID: 1504723394}
-  currentState: 0
-  activatedSlots: 0
-  setToRestart: 0
-  setToMenu: 0
-  currentPlay: 
 --- !u!1 &559241770
 GameObject:
   m_ObjectHideFlags: 0
@@ -5967,6 +5940,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1824103704}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &974746781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 974746782}
+  - component: {fileID: 974746783}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &974746782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974746781}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 534669905}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974746783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974746781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c3d6e119c431b44a751f20ef5ffaec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentPlayerUIGameObject: {fileID: 2043966604}
+  _boardController: {fileID: 1504723394}
+  _inGameButtonsAnimator: {fileID: 1110173214}
+  _fallingPieces: {fileID: 1191372982}
+  _fadeAnimator: {fileID: 1427504996}
+  _ai: {fileID: 534669907}
+  _audioManager: {fileID: 804955251}
+  currentState: 0
+  activatedSlots: 0
+  useDeep: 0
 --- !u!1 &997617813
 GameObject:
   m_ObjectHideFlags: 0
@@ -12498,6 +12524,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027858090}
   m_Mesh: {fileID: 4300098, guid: 83e5ddd5977f64451bf5d8f291b767be, type: 3}
+--- !u!1 &2029616941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2029616942}
+  - component: {fileID: 2029616943}
+  m_Layer: 0
+  m_Name: NetworkGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2029616942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029616941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 534669905}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2029616943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029616941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0330442356b4bbb40a0f121c79464545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inGameButtonsAnimator: {fileID: 1110173214}
+  _fallingPieces: {fileID: 1191372982}
+  _fadeAnimator: {fileID: 1427504996}
+  _currentPlayerText: {fileID: 2043966606}
+  boardController: {fileID: 1504723394}
+  currentState: 0
+  activatedSlots: 0
+  setToRestart: 0
+  setToMenu: 0
+  currentPlay: 
 --- !u!1 &2036311199
 GameObject:
   m_ObjectHideFlags: 0
@@ -12579,7 +12658,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 534669906}
+      - m_Target: {fileID: 0}
         m_MethodName: ToggleCPUStart
         m_Mode: 1
         m_Arguments:
