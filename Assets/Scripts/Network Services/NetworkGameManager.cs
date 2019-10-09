@@ -29,6 +29,11 @@ public class NetworkGameManager : MonoBehaviour
 
     private void Start()
     {
+        if(NetworkManagerSingleton.singleton!=null)
+        {
+            NetworkManagerSingleton.singleton.StopHost();
+            NetworkManagerSingleton.singleton.StopClient();
+        }
         if (instance == null)
             instance = this;
         else if (instance != this)
@@ -137,7 +142,6 @@ public class NetworkGameManager : MonoBehaviour
 
     private void ResetGame()
     {
-        Debug.Log("hello");
         _gameEnded = false;
         currentPlay = "";
         _fallingPieces.ResetPieces();

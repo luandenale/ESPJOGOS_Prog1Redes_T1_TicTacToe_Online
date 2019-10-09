@@ -40,6 +40,12 @@ public class OnlineMatchManager : MonoBehaviour
         _searching = true;
     }
 
+    private void OnDisable()
+    {
+        NetworkManagerSingleton.onServerConnect -= OnServerConnect;
+        NetworkManagerSingleton.onClientConnect -= OnClientConnect;
+    }
+
     public void CreateMatch()
     {
         NetworkManagerSingleton.Match.CreateMatch(_matchName.text, 2, true, "", "", "", 0, 0, 

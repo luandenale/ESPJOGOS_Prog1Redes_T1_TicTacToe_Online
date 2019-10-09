@@ -33,6 +33,8 @@ public static class NetworkPlayerHandler
         {
             player.ToMenu();
         }
+
+        _players.Clear();
     }
 
     public static void UpdateValue(int p_xPos, int p_yPos, string p_playerSymbol, bool isServer)

@@ -58,7 +58,12 @@ public class LANMatchManager : MonoBehaviour
         _menuUIManager.WaitingOponent();
     }
 
-    
+    private void OnDisable()
+    {
+        NetworkManagerSingleton.onServerConnect -= OnServerConnect;
+    }
+
+
     private void Update()
     {
         if (!_hasConnected && _searching)
