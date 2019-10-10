@@ -22,7 +22,7 @@ public class OnlineMatchManager : MonoBehaviour
     private float _currentUpdateInterval;
 
     private bool _hasConnected;
-    private bool _searching = false;
+    public bool searching = false;
 
     private List<GameObject> _instantiatedGameObjects = new List<GameObject>();
 
@@ -37,7 +37,7 @@ public class OnlineMatchManager : MonoBehaviour
         // _matches.Clear();
         _searchMatchButton.SetActive(false);
         // NetworkManagerSingleton.Discovery.StartAsClient();
-        _searching = true;
+        searching = true;
     }
 
     private void OnDisable()
@@ -56,7 +56,7 @@ public class OnlineMatchManager : MonoBehaviour
         NetworkManagerSingleton.onClientConnect += OnClientConnect;
 
         _hasConnected = true;
-        _searching = false;
+        searching = false;
 
         _menuUIManager.WaitingOponent();
     }
@@ -75,7 +75,7 @@ public class OnlineMatchManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_hasConnected && _searching)
+        if (!_hasConnected && searching)
         {
             _currentUpdateInterval -= Time.deltaTime;
             if (_currentUpdateInterval < 0)
@@ -95,17 +95,20 @@ public class OnlineMatchManager : MonoBehaviour
             NetworkManagerSingleton.singleton.OnMatchList);
     }
 
-    // Atualiza a lista de partidas nos botões, lendo da
-    // lista interna de partidas do NetworkManager.
+    public void ClearMatches()
+    {
+        foreach (GameObject __instance in _instantiatedGameObjects)
+        {
+            Destroy(__instance);
+        }
+    }
+
     private void UpdateButtons()
     {
         List<MatchInfoSnapshot> __matches = NetworkManagerSingleton.singleton.matches;
         if(__matches != null)
         {
-            foreach (GameObject __instance in _instantiatedGameObjects)
-            {
-                Destroy(__instance);
-            }
+            ClearMatches();
 
             foreach(MatchInfoSnapshot __match in __matches)
             {

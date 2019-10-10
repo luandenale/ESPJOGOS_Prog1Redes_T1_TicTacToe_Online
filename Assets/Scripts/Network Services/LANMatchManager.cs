@@ -21,7 +21,7 @@ public class LANMatchManager : MonoBehaviour
     private readonly float _broadcastUpdateInterval = 1f;
     private float _currentUpdateInterval;
     private bool _hasConnected;
-    private bool _searching = false;
+    public bool searching = false;
 
     private List<GameObject> _instantiatedGameObjects = new List<GameObject>();
 
@@ -30,20 +30,20 @@ public class LANMatchManager : MonoBehaviour
 
     private void Start()
     {
-        NetworkManagerSingleton.Discovery.Initialize();
     }
 
     public void SearchForMatches()
     {
         _matches.Clear();
         _searchMatchButton.SetActive(false);
+        NetworkManagerSingleton.Discovery.Initialize();
         NetworkManagerSingleton.Discovery.StartAsClient();
-        _searching = true;
+        searching = true;
     }
 
     public void CreateMatch()
     {
-        if(_searching)
+        if(searching)
             NetworkManagerSingleton.Discovery.StopBroadcast();
 
         NetworkManagerSingleton.Discovery.broadcastData = _matchName.text;
@@ -66,7 +66,7 @@ public class LANMatchManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_hasConnected && _searching)
+        if (!_hasConnected && searching)
         {
             _currentUpdateInterval -= Time.deltaTime;
             if (_currentUpdateInterval < 0)
@@ -96,13 +96,18 @@ public class LANMatchManager : MonoBehaviour
         NetworkManagerSingleton.Discovery.StopBroadcast();
     }
 
-    private void RefreshMatches()
+    public void ClearMatches()
     {
         foreach (GameObject __instance in _instantiatedGameObjects)
         {
             Destroy(__instance);
         }
         _matches.Clear();
+    }
+
+    private void RefreshMatches()
+    {
+        ClearMatches();
 
         foreach (NetworkBroadcastResult __match in NetworkManagerSingleton.Discovery.broadcastsReceived.Values)
         {

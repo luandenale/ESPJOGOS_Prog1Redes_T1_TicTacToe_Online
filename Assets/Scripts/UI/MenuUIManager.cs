@@ -9,6 +9,10 @@ public class MenuUIManager : MonoBehaviour
     private Text _popUpText;
     private Animator _menuAnimator;
 
+    [SerializeField] LANMatchManager _lanMatchManager;
+    [SerializeField] OnlineMatchManager _onlineMatchManager;
+    [SerializeField] GameObject _searchMatchButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,6 +110,19 @@ public class MenuUIManager : MonoBehaviour
 
     public void CloseLobby()
     {
+        _searchMatchButton.SetActive(true);
+        if(GameMode.mode == Mode.LAN)
+        {
+            NetworkManagerSingleton.Discovery.StopBroadcast();
+            _lanMatchManager.ClearMatches();
+            _lanMatchManager.searching = false;
+        }
+        else
+        {
+            NetworkManagerSingleton.singleton.matches.Clear();
+            _onlineMatchManager.ClearMatches();
+            _onlineMatchManager.searching = false;       
+        }
         _menuAnimator.SetTrigger("Pop Down Lobby");
     }
 }
