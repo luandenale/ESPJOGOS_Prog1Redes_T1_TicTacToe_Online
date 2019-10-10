@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\FallingPiecesManager.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameMode.cs" />
+     <Compile Include="Assets\Scripts\Network Services\_Interfaces\IMatchManager.cs" />
      <Compile Include="Assets\Scripts\Network Services\LANMatchManager.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkGameManager.cs" />
      <Compile Include="Assets\Scripts\Network Services\NetworkManagerSingleton.cs" />

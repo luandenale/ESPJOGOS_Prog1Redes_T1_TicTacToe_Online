@@ -14,17 +14,16 @@ public class NetworkPlayerInstance : NetworkBehaviour
         }
     }
 
+#region RESTART
     [Command]
     private void CmdResetBoard()
     {
         NetworkPlayerHandler.ResetBoard();
     }
 
-    // Chamado pelo servidor, executa no cliente
     [ClientRpc]
     private void RpcResetBoard()
     {
-        // garante que só é chamado no player que é dono do objeto
         if (!isLocalPlayer) return;
 
         _lastPlayer = "o";
@@ -35,18 +34,18 @@ public class NetworkPlayerInstance : NetworkBehaviour
     {
         RpcResetBoard();
     }
+#endregion
 
+#region TOMENU
     [Command]
     private void CmdToMenu()
     {
         NetworkPlayerHandler.ToMenu();
     }
 
-    // Chamado pelo servidor, executa no cliente
     [ClientRpc]
     private void RpcToMenu()
     {
-        // garante que só é chamado no player que é dono do objeto
         if (!isLocalPlayer) return;
 
         NetworkGameManager.instance.ReloadAllGame();
@@ -56,31 +55,29 @@ public class NetworkPlayerInstance : NetworkBehaviour
     {
         RpcToMenu();
     }
+#endregion
 
-    // Chamado pelo cliente, executa no servidor
+#region UPDATEPLAY
     [Command]
     private void CmdDoMove(int p_xPos, int p_yPos, string p_playerSymbol)
     {
         NetworkPlayerHandler.UpdateValue(p_xPos, p_yPos, p_playerSymbol, true);
     }
 
-    // Chamado pelo servidor, executa no cliente
     [ClientRpc]
     private void RpcUpdateValue(int p_xPos, int p_yPos, string p_playerSymbol)
     {
-        // garante que só é chamado no player que é dono do objeto
         if (!isLocalPlayer) return;
 
         _lastPlayer = p_playerSymbol;
         NetworkPlayerHandler.UpdateValue(p_xPos, p_yPos, p_playerSymbol, false);
     }
 
-
-    // Roda apenas no servidor. Replica atualização para os clientes.
     public void UpdateValue(int p_xPos, int p_yPos, string p_playerSymbol)
     {
         RpcUpdateValue(p_xPos, p_yPos, p_playerSymbol);
     }
+#endregion
 
     private void Update()
     {
@@ -126,8 +123,7 @@ public class NetworkPlayerInstance : NetworkBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                //TODO: ADD SOUND MANAGER LATER
-                //_audioManager.PlayClickSlot();
+                NetworkGameManager.instance.audioManager.PlayClickSlot();
                 SlotController __slot = hit.transform.gameObject.GetComponent<SlotController>();
 
                 string __playerSymbol;

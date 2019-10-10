@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking.Match;
 using UnityEngine.Networking;
 
-public class OnlineMatchManager : MonoBehaviour
+public class OnlineMatchManager : MonoBehaviour, IMatchManager
 {
     [SerializeField]
     private InputField _matchName;
@@ -34,16 +34,8 @@ public class OnlineMatchManager : MonoBehaviour
 
     public void SearchForMatches()
     {
-        // _matches.Clear();
         _searchMatchButton.SetActive(false);
-        // NetworkManagerSingleton.Discovery.StartAsClient();
         searching = true;
-    }
-
-    private void OnDisable()
-    {
-        NetworkManagerSingleton.onServerConnect -= OnServerConnect;
-        NetworkManagerSingleton.onClientConnect -= OnClientConnect;
     }
 
     public void CreateMatch()
@@ -59,6 +51,12 @@ public class OnlineMatchManager : MonoBehaviour
         searching = false;
 
         _menuUIManager.WaitingOponent();
+    }
+
+    private void OnDisable()
+    {
+        NetworkManagerSingleton.onServerConnect -= OnServerConnect;
+        NetworkManagerSingleton.onClientConnect -= OnClientConnect;
     }
 
     private void OnClientConnect(NetworkConnection obj)
@@ -88,9 +86,8 @@ public class OnlineMatchManager : MonoBehaviour
         }
     }
 
-    private void RefreshMatches()
+    public void RefreshMatches()
     {
-        // Atualiza a lista interna de partidas, passando o callback do NetworkManager.
         NetworkManagerSingleton.Match.ListMatches(0, 10, "", true, 0, 0, 
             NetworkManagerSingleton.singleton.OnMatchList);
     }
@@ -116,6 +113,7 @@ public class OnlineMatchManager : MonoBehaviour
                 __matchInstance.GetComponentsInChildren<Text>()[0].text = __match.name;
                 __matchInstance.GetComponentInChildren<Button>().onClick.AddListener((delegate 
                 {
+                    NetworkGameManager.instance.audioManager.PlayClickButton();
                     OnMatchConnectClick(__match);
                 }));
 
@@ -135,4 +133,5 @@ public class OnlineMatchManager : MonoBehaviour
 
         _menuUIManager.OponentConnected();
     }
+
 }

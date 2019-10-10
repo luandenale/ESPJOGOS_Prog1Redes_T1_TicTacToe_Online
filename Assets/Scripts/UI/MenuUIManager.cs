@@ -96,7 +96,7 @@ public class MenuUIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _popUpText.text = "OPPONENT CONNECTED\nSTARTING IN 1";
         yield return new WaitForSeconds(1f);
-        _popUpText.text = "game started";
+        _popUpText.text = "OPPONENT CONNECTED\nSTARTING NOW...";
 
         _menuAnimator.SetTrigger("Online Start");
         NetworkGameManager.instance.currentState = GameStates.STARTING;

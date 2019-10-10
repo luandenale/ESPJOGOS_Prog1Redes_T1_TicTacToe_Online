@@ -7,15 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class NetworkGameManager : MonoBehaviour
 {
-    //[SerializeField] GameObject _currentPlayerUIGameObject;
     [SerializeField] Animator _inGameButtonsAnimator;
     [SerializeField] FallingPiecesManager _fallingPieces;
     [SerializeField] Animator _fadeAnimator;
-
-    //private AudioManager _audioManager;
     [SerializeField] Text _currentPlayerText;
-    //private Animator _currentPlayerAnimator;
+
     private bool _gameEnded = false;
+
+    public  AudioManager audioManager;
     public BoardController boardController;
     public static NetworkGameManager instance = null;
     public GameStates currentState = GameStates.MENU;
@@ -40,10 +39,6 @@ public class NetworkGameManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-
-        // _currentPlayerText = _currentPlayerUIGameObject.GetComponent<Text>();
-        // _currentPlayerAnimator = _currentPlayerUIGameObject.GetComponent<Animator>();
-        // _audioManager = GetComponentInChildren<AudioManager>();
     }
 
     private void Update()
@@ -61,25 +56,22 @@ public class NetworkGameManager : MonoBehaviour
                 if (!_gameEnded)
                 {
                     _gameEnded = true;
-                    // _currentPlayerAnimator.SetBool("Glow", false);
                     _currentPlayerText.text = "'O' PLAYER WON!";
                 
                     _fallingPieces.FallPieces("o");
-                    // _audioManager.PlayWinYay();
+                    audioManager.PlayWinYay();
                 }
                 break;
             case GameStates.X_WON:
                 if (!_gameEnded)
                 {
                     _gameEnded = true;
-                    // _currentPlayerAnimator.SetBool("Glow", false);
                     _currentPlayerText.text = "'X' PLAYER WON!";
                     _fallingPieces.FallPieces("x");
-                    // _audioManager.PlayWinYay();
+                    audioManager.PlayWinYay();
                 }
                 break;
             case GameStates.TIE:
-                //  _currentPlayerAnimator.SetBool("Glow", false);
                 _currentPlayerText.text = "GAME TIED";
                  break;
             case GameStates.RESTART:
@@ -114,7 +106,6 @@ public class NetworkGameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
     }
 
-    // Called only from UI
     public void ReloadAllGame()
     {
         StartCoroutine(ReloadGameAnimation());
@@ -134,7 +125,6 @@ public class NetworkGameManager : MonoBehaviour
         boardController.InitializeAnimation();
         yield return new WaitForSeconds(1.35f);
 
-        // _currentPlayerAnimator.SetTrigger("Initiate");
         _inGameButtonsAnimator.SetTrigger("SlideIn");
 
         currentState = GameStates.RUNNING;

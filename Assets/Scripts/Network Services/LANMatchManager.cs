@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using System.Linq;
 using System.Text;
 
-public class LANMatchManager : MonoBehaviour
+public class LANMatchManager : MonoBehaviour, IMatchManager
 {
     [SerializeField]
     private InputField _matchName;
@@ -25,7 +25,6 @@ public class LANMatchManager : MonoBehaviour
 
     private List<GameObject> _instantiatedGameObjects = new List<GameObject>();
 
-    // Lista temporária utilizada para ler as partidas encontradas pelo Network Discovery.
     private List<NetworkBroadcastResult> _matches = new List<NetworkBroadcastResult>();
 
     private void Start()
@@ -105,7 +104,7 @@ public class LANMatchManager : MonoBehaviour
         _matches.Clear();
     }
 
-    private void RefreshMatches()
+    public void RefreshMatches()
     {
         ClearMatches();
 
@@ -124,6 +123,7 @@ public class LANMatchManager : MonoBehaviour
             __matchInstance.GetComponentsInChildren<Text>()[0].text = __matchName;
             __matchInstance.GetComponentInChildren<Button>().onClick.AddListener((delegate 
             {
+                NetworkGameManager.instance.audioManager.PlayClickButton();
                 OnMatchConnectClick(__match);
             }));
 
