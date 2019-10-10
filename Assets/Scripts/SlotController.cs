@@ -19,7 +19,7 @@ public class SlotController : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.instance != null)
+        if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
         {
             if (GameManager.instance.currentState == GameStates.RESTART)
             {
@@ -58,7 +58,7 @@ public class SlotController : MonoBehaviour
     public void SetSymbolToSlot(string p_symbol)
     {
         selected = true;
-        if(GameManager.instance != null)
+        if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
             GameManager.instance.activatedSlots++;
         else
             NetworkGameManager.instance.activatedSlots++;

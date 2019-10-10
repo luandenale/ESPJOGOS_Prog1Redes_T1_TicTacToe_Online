@@ -66,10 +66,8 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        _ai = GetComponent<AILibrary>();
         _currentPlayerText = _currentPlayerUIGameObject.GetComponent<Text>();
         _currentPlayerAnimator = _currentPlayerUIGameObject.GetComponent<Animator>();
-        _audioManager = GetComponentInChildren<AudioManager>();
     }
 
     private void Update()

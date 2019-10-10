@@ -25,13 +25,14 @@ public class BoardController : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.instance != null)
+        if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
         {
             if (GameManager.instance.currentState != GameStates.RESTART)
                 UpdateSlots();
-        }else
+        }else if(GameMode.mode == Mode.LAN || GameMode.mode == Mode.ONLINE)
         {
-            UpdateSlots();
+            if (NetworkGameManager.instance.currentState != GameStates.RESTART)
+                UpdateSlots();
         }
     }
 
@@ -147,15 +148,15 @@ public class BoardController : MonoBehaviour
             {
                 if (__whoWon == "x")
                 {
-                    if(GameManager.instance != null)
+                    if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
                         GameManager.instance.currentState = GameStates.X_WON;
-                    else
+                    else 
                         NetworkGameManager.instance.currentState = GameStates.X_WON;
                 }
                     
                 else
                 {
-                    if(GameManager.instance != null)
+                    if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
                         GameManager.instance.currentState = GameStates.O_WON;
                     else
                         NetworkGameManager.instance.currentState = GameStates.O_WON;
@@ -166,7 +167,7 @@ public class BoardController : MonoBehaviour
         }
         else if(__gameEnded && p_mainCheck)
         {
-            if(GameManager.instance != null)
+            if(GameMode.mode == Mode.IA || GameMode.mode == Mode.SINGLE)
                 GameManager.instance.currentState = GameStates.TIE;
             else
                 NetworkGameManager.instance.currentState = GameStates.TIE;

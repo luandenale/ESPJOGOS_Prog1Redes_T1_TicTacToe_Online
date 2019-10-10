@@ -55,18 +55,6 @@ public class NetworkPlayerInstance : NetworkBehaviour
     public void ToMenu()
     {
         RpcToMenu();
-        // GameDisconnect();
-    }
-
-    private void GameDisconnect()
-    {
-        if(isServer)
-            NetworkManagerSingleton.singleton.StopHost();
-        else
-        {
-            NetworkClient.ShutdownAll();
-            NetworkManagerSingleton.singleton.StopClient();            
-        }
     }
 
     // Chamado pelo cliente, executa no servidor
@@ -98,25 +86,28 @@ public class NetworkPlayerInstance : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        if(_lastPlayer == "x")
+        if(NetworkGameManager.instance.currentState == GameStates.RUNNING)
         {
-            if(isServer)
-                NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
-            else
+            if(_lastPlayer == "x")
             {
-                NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'O'";
-                ClickSquare();
-            }
-        }
-        else
-        {
-            if(isServer)
-            {
-                NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'X'";
-                ClickSquare();
+                if(isServer)
+                    NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
+                else
+                {
+                    NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'O'";
+                    ClickSquare();
+                }
             }
             else
-                NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
+            {
+                if(isServer)
+                {
+                    NetworkGameManager.instance.currentPlay = "YOUR TURN, PLACE THE 'X'";
+                    ClickSquare();
+                }
+                else
+                    NetworkGameManager.instance.currentPlay = "OPPONENTS TURN...";
+            }
         }
 
         // Should restart everybody
